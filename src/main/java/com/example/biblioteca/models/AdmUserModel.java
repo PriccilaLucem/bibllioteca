@@ -29,7 +29,10 @@ public class AdmUserModel {
     public AdmUserModel(String email, String password, Boolean isAdm) {
         this.email = email;
         this.password = password;
-        this.isAdm = true;
+        this.isAdm = isAdm;
+    }
+    public String getPassword() {
+        return password;
     }
     public String getEmail() {
         return email;
