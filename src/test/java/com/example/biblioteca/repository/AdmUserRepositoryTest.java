@@ -41,4 +41,12 @@ public class AdmUserRepositoryTest {
             assertThat(adm.getPassword()).isEqualTo(foundAdmUserModel.getPassword());
             assertThat(foundAdmUserModel.getIsAdm()).isTrue();
         }
+
+    @Test
+    public void testFindByWrongEmail(){
+        String email = "";
+        when(admUserRepository.findByEmail(email)).thenReturn(Optional.empty());
+        Optional<AdmUserModel> adm = admUserRepository.findByEmail(email);
+        assertThat(adm).isEmpty();
+    }
 }

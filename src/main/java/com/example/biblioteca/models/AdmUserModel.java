@@ -21,7 +21,7 @@ public class AdmUserModel {
     @Column(name = "password", nullable = false, length = 60)
     private String password;
     
-    @Column(name = "is_adm", nullable = false)
+    @Column(name = "is_adm", nullable = false, updatable = false)
     private Boolean isAdm;
 
     public AdmUserModel(){}

@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "user")
 public class UserModel extends AdmUserModel {
-    
+
     public UserModel() {
         super();
         setIsAdm(false);
