@@ -15,7 +15,7 @@ public class AdmUserModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "email", nullable = false, length = 60 )
+    @Column(name = "email", nullable = false, length = 60, unique=true)
     private String email;
 
     @Column(name = "password", nullable = false, length = 60)
