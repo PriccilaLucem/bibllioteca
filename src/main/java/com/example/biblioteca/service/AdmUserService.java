@@ -42,7 +42,9 @@ public class AdmUserService {
         }
         throw new EntityNotFoundException("Adm is invalid");
     }
-
+    public boolean verifyPasswordAdmUserService(String password, String hashedPassowrd){
+        return BCrypt.verifyer().verify(password.toCharArray(), password).verified;
+    }
     private String hashAdmUserPasswordService(String password){
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }

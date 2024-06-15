@@ -7,6 +7,12 @@ public class AdmUserDto {
 
     public AdmUserDto(){}
 
+    public AdmUserDto(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
+
+
     public AdmUserDto(String email, String password, String hashCodeToCreateAdm){
         this.email = email;
         this.password = password;
