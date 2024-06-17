@@ -14,6 +14,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.example.biblioteca.dto.AdmUserDto;
 import com.example.biblioteca.presenter.LoginPresenter;
@@ -23,6 +25,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @WebMvcTest(LoginController.class)
 public class LoginControllerTest {
 
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+    
     @MockBean
     private LoginPresenter loginPresenter;
 
@@ -35,6 +41,8 @@ public class LoginControllerTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
     }
 
     @Test
@@ -44,7 +52,7 @@ public class LoginControllerTest {
 
         when(loginPresenter.Login(any(AdmUserDto.class))).thenReturn(jwt);
 
-        mockMvc.perform(post("/api/adm/login")
+        mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(admDto)))
 

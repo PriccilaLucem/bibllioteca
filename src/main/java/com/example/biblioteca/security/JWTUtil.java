@@ -1,5 +1,6 @@
 package com.example.biblioteca.security;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -7,10 +8,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.hibernate.cfg.Environment;
-// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-// import org.springframework.security.core.Authentication;
-// import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import com.example.biblioteca.models.AdmUserModel;
 
@@ -20,19 +21,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-
+@Component
 public class JWTUtil {
 
-
-    private static String SECRET_KEY = Environment.getProperties().getProperty("SECRET_KEY");
+    private String SECRET_KEY ;
     private String token;
 
-    public JWTUtil(){}
 
     public JWTUtil(String token){
         this.token = token;
+        this.SECRET_KEY = Dotenv.load().get("SECRET_KEY");
     }
 
+    public JWTUtil() {
+        this.SECRET_KEY = Dotenv.load().get("SECRET_KEY");
+
+    }
     public String getToken() {
         return token;
     }
@@ -40,12 +44,12 @@ public class JWTUtil {
         this.token = token;
     }
     
-    private static SecretKey generateKey() {
+    public  SecretKey generateKey() {
         byte[] secretKeyBytes = Base64.getEncoder().encode(SECRET_KEY.getBytes());
         return new SecretKeySpec(secretKeyBytes, SignatureAlgorithm.HS256.getJcaName());
     }
 
-    public static String generateToken(AdmUserModel user) {
+    public String generateToken(AdmUserModel user) {
         SecretKey key = generateKey();
         String token = Jwts.builder()
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -57,7 +61,7 @@ public class JWTUtil {
         return token;
     }
 
-    public String resolveToken(HttpServletRequest request) {
+    public static String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.split(" ")[1];
@@ -65,7 +69,7 @@ public class JWTUtil {
         return null;
     }
 
-    public boolean validateToken(String jwtToken) {
+    public  boolean validateToken(String jwtToken) {
         SecretKey key = generateKey();
         try {
             Jwts.parserBuilder()
@@ -78,14 +82,14 @@ public class JWTUtil {
         }
     }
 
-    // public Authentication getAuthentication(String token) {
-    //     String userId = parseUserIdFromToken(token);
-    //     List<String> roles = parseRolesFromToken(token);
-    //     List<SimpleGrantedAuthority> authorities = createAuthorities(roles);
-    //     return new UsernamePasswordAuthenticationToken(userId, null, authorities);
-    // }
+    public Authentication getAuthentication(String token) {
+        String userId = parseUserIdFromToken(token);
+        List<String> roles = parseRolesFromToken(token);
+        List<SimpleGrantedAuthority> authorities = createAuthorities(roles);
+        return new UsernamePasswordAuthenticationToken(userId, null, authorities);
+    }
 
-    public static String parseUserIdFromToken(String token) {
+    public  String parseUserIdFromToken(String token) {
         byte[] secretKeyBytes = Base64.getEncoder().encode(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(secretKeyBytes))
@@ -104,22 +108,22 @@ public class JWTUtil {
                 .getBody();
 
         List<String> roles = new ArrayList<>();
-        Object obj = claims.getOrDefault("is valid", "false");
+        Object obj = claims.getOrDefault("is_adm", "false");
         if (obj.equals(true)) {
-            roles.add("ROLE_USER_IS_VALID");
+            roles.add("ROLE_IS_ADM");
         } else {
-            roles.add("ROLE_USER_IS_NOT_VALID");
+            roles.add("ROLE_IS_NOT_ADM");
         }
         return roles;
     }
 
-    // private List<SimpleGrantedAuthority> createAuthorities(List<String> roles) {
-    //     List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    //     for (String role : roles) {
-    //         authorities.add(new SimpleGrantedAuthority(role));
-    //     }
-    //     return authorities;
-    // }
+    private List<SimpleGrantedAuthority> createAuthorities(List<String> roles) {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (String role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role));
+        }
+        return authorities;
+    }
 
     public Claims parseTokenToObject(String token) {
         byte[] secretKeyBytes = Base64.getEncoder().encode(SECRET_KEY.getBytes(StandardCharsets.UTF_8));

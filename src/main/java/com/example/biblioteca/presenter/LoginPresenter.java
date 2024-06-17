@@ -18,7 +18,7 @@ public class LoginPresenter {
 
     public JWTUtil Login(AdmUserDto adm) throws Exception{
         AdmUserModel admToGenToken = loginService.verifyAdmUserService(Mapper.parseObject(adm, AdmUserModel.class));
-        String token = JWTUtil.generateToken(admToGenToken); 
+        String token = new JWTUtil().generateToken(admToGenToken); 
         return new JWTUtil(token);
     }
 }

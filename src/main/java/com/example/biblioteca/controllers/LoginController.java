@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/api/adm/login")
+@RequestMapping("/api/login")
 public class LoginController {
 
     @Autowired
