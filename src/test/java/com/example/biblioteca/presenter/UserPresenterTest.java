@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.models.UserModel;
+import com.example.biblioteca.repository.UserPresenter;
 import com.example.biblioteca.service.UserService;
 
 @ExtendWith(MockitoExtension.class)

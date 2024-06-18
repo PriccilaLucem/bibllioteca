@@ -19,6 +19,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.example.biblioteca.models.AdmUserModel;
 import com.example.biblioteca.repository.AdmUserRepository;
+import com.example.biblioteca.util.ValidateData;
+
 import org.junit.runner.RunWith;
 
 import java.util.Optional;
@@ -26,6 +28,9 @@ import java.util.Optional;
 @RunWith(MockitoJUnitRunner.class)
 public class AdmUserServiceTest {
     
+
+    @Mock
+    private ValidateData validateData;
     
     @Captor
     private ArgumentCaptor<String> idCaptor;

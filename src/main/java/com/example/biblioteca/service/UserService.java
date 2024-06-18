@@ -14,10 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
-    
+    @Autowired
+    private ValidateData validateData;
+
     public UserModel createUser(UserModel user) throws Exception{
-        String password = ValidateData.hashUserPasswordUtil(user.getPassword());
-        ValidateData.verifyUserEmailUtil(user.getEmail());
+        String password = validateData.hashUserPasswordUtil(user.getPassword());
+        validateData.verifyUserEmailUtil(user.getEmail());
         
         user.setIsAdm(false);
         user.setPassword(password);
@@ -28,8 +30,8 @@ public class UserService {
     public UserModel updateUser(String id, UserModel user) throws Exception{
         if(userRepository.findById(id).isPresent()){
             user.setId(id);
-            ValidateData.verifyUserEmailUtil(user.getEmail());
-            user.setPassword(ValidateData.hashUserPasswordUtil(user.getPassword()));
+            validateData.verifyUserEmailUtil(user.getEmail());
+            user.setPassword(validateData.hashUserPasswordUtil(user.getPassword()));
             return userRepository.save(user);
         }
         throw new EntityNotFoundException("User is invalid");

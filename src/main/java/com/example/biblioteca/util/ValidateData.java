@@ -1,20 +1,21 @@
 package com.example.biblioteca.util;
 
 import org.apache.coyote.BadRequestException;
+import org.springframework.stereotype.Service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-
+@Service
 public class ValidateData {
         
-    public static boolean verifyPasswordUserUtil(String password, String hashedPassowrd){
+    public boolean verifyPasswordUserUtil(String password, String hashedPassowrd){
         return BCrypt.verifyer().verify(password.toCharArray(), password).verified;
     }
 
-    public static String hashUserPasswordUtil(String password){
+    public String hashUserPasswordUtil(String password){
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
 
-    public static void verifyUserEmailUtil(String email) throws BadRequestException{
+    public void verifyUserEmailUtil(String email) throws BadRequestException{
         String regex = "^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         if(!email.matches(regex)){
             throw new BadRequestException("Invalid Email");

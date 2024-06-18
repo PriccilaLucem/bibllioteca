@@ -7,8 +7,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 import com.example.biblioteca.dto.UserDto;
-import com.example.biblioteca.exceptions.UnauthorizedException;
 import com.example.biblioteca.models.AdmUserModel;
+import com.example.biblioteca.exceptions.UnauthorizedException;
 import com.example.biblioteca.service.AdmUserService;
 
 import org.junit.jupiter.api.BeforeEach;

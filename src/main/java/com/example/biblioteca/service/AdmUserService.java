@@ -13,11 +13,14 @@ import jakarta.persistence.EntityNotFoundException;
 public class AdmUserService {
     
     @Autowired
+    private ValidateData validateData;
+
+    @Autowired
     private AdmUserRepository admUserRepository;
     
     public AdmUserModel createAdmUserService(AdmUserModel adm) throws BadRequestException{
-        ValidateData.verifyUserEmailUtil(adm.getEmail());
-        adm.setPassword(ValidateData.hashUserPasswordUtil(adm.getPassword()));
+        validateData.verifyUserEmailUtil(adm.getEmail());
+        adm.setPassword(validateData.hashUserPasswordUtil(adm.getPassword()));
         adm.setIsAdm(true);
         return this.admUserRepository.save(adm);
         
@@ -28,11 +31,11 @@ public class AdmUserService {
     }
 
     public AdmUserModel updateAdmUserService(String id, AdmUserModel adm) throws BadRequestException{
-        ValidateData.verifyUserEmailUtil(adm.getEmail());
+        validateData.verifyUserEmailUtil(adm.getEmail());
 
         if(admUserRepository.findById(id).isPresent()){
             
-            String password = ValidateData.hashUserPasswordUtil(adm.getPassword());
+            String password = validateData.hashUserPasswordUtil(adm.getPassword());
 
             AdmUserModel admToput = new AdmUserModel(adm.getEmail(), password, true);
 

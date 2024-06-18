@@ -20,7 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.models.UserModel;
-import com.example.biblioteca.presenter.UserPresenter;
+import com.example.biblioteca.repository.UserPresenter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(UserController.class)
