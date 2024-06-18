@@ -6,7 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-import com.example.biblioteca.dto.AdmUserDto;
+import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.exceptions.UnauthorizedException;
 import com.example.biblioteca.models.AdmUserModel;
 import com.example.biblioteca.service.AdmUserService;
@@ -35,7 +35,7 @@ public class AdmUserPresenterTest {
 
     @Test
     public void testPostAdmUserPresenter_ValidHashCode() throws Exception {
-        AdmUserDto admUserDto = new AdmUserDto("teste@test.com", "teste", "expectedHashCode");
+        UserDto admUserDto = new UserDto("teste@test.com", "teste", "expectedHashCode");
         AdmUserModel admUserModel = new AdmUserModel("teste@test.com", "teste", true);
 
         when(admUserService.createAdmUserService(any(AdmUserModel.class))).thenReturn(admUserModel);
@@ -51,7 +51,7 @@ public class AdmUserPresenterTest {
 
     @Test
     public void testPostAdmUserPresenter_InvalidHashCode() throws Exception {
-        AdmUserDto admUserDto = new AdmUserDto("teste@test.com", "teste", "invalidHashCode");
+        UserDto admUserDto = new UserDto("teste@test.com", "teste", "invalidHashCode");
 
         UnauthorizedException exception = assertThrows(UnauthorizedException.class, () -> {
             admUserPresenter.postAdmUserPresenter(admUserDto);
@@ -64,7 +64,7 @@ public class AdmUserPresenterTest {
 
     @Test
     public void testPutAdmUserPresenter_ValidHashCode() throws Exception {
-        AdmUserDto admUserDto = new AdmUserDto("teste@test.com", "teste", "expectedHashCode");
+        UserDto admUserDto = new UserDto("teste@test.com", "teste", "expectedHashCode");
         AdmUserModel admUserModel = new AdmUserModel("teste@test.com", "teste", true);
 
         when(admUserService.updateAdmUserService(anyString(), any(AdmUserModel.class))).thenReturn(admUserModel);
@@ -80,7 +80,7 @@ public class AdmUserPresenterTest {
 
     @Test
     public void testPutAdmUserPresenter_InvalidHashCode() throws Exception {
-        AdmUserDto admUserDto = new AdmUserDto("teste@test.com", "teste", "invalidHashCode");
+        UserDto admUserDto = new UserDto("teste@test.com", "teste", "invalidHashCode");
 
         UnauthorizedException exception = assertThrows(UnauthorizedException.class, () -> {
             admUserPresenter.putAdmUserPresenter("id", admUserDto);

@@ -27,7 +27,7 @@ import java.util.Optional;
 public class AdmUserServiceTest {
     
     
-  @Captor
+    @Captor
     private ArgumentCaptor<String> idCaptor;
 
     @Mock

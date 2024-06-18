@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.example.biblioteca.dto.AdmUserDto;
+import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.presenter.LoginPresenter;
 import com.example.biblioteca.security.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,10 +47,10 @@ public class LoginControllerTest {
 
     @Test
     public void testPostLoginController() throws Exception {
-        AdmUserDto admDto = new AdmUserDto("test@mail.com", "test");
+        UserDto admDto = new UserDto("test@mail.com", "test");
         JWTUtil jwt = new JWTUtil("string");
 
-        when(loginPresenter.Login(any(AdmUserDto.class))).thenReturn(jwt);
+        when(loginPresenter.Login(any(UserDto.class))).thenReturn(jwt);
 
         mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_JSON)

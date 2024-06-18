@@ -3,7 +3,7 @@ package com.example.biblioteca.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.biblioteca.dto.AdmUserDto;
+import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.presenter.LoginPresenter;
 import com.example.biblioteca.security.JWTUtil;
 
@@ -21,7 +21,7 @@ public class LoginController {
     private LoginPresenter loginPresenter;
 
     @PostMapping()
-    public ResponseEntity<JWTUtil> LoginPostController(@RequestBody AdmUserDto entity) throws Exception {
+    public ResponseEntity<JWTUtil> LoginPostController(@RequestBody UserDto entity) throws Exception {
         return ResponseEntity.ok().body(loginPresenter.Login(entity));
     }
 

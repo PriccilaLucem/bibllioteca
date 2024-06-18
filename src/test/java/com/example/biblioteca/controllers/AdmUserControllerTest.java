@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.biblioteca.dto.AdmUserDto;
+import com.example.biblioteca.dto.UserDto;
 
 @WebMvcTest(AdmUserController.class)
 public class AdmUserControllerTest {
@@ -50,9 +50,9 @@ public class AdmUserControllerTest {
     @Test
     public void testPostAdmUserController() throws Exception {
         AdmUserModel admUserModel = new AdmUserModel("teste@test.com", "teste", true);
-        AdmUserDto admUserDto = new AdmUserDto("teste@test.com", "teste", "expectedHashCode");
+        UserDto admUserDto = new UserDto("teste@test.com", "teste", "expectedHashCode");
 
-        when(admUserPresenter.postAdmUserPresenter(any(AdmUserDto.class))).thenReturn(admUserModel);
+        when(admUserPresenter.postAdmUserPresenter(any(UserDto.class))).thenReturn(admUserModel);
 
         mockMvc.perform(post("/api/adm")
         .contentType(MediaType.APPLICATION_JSON)
@@ -64,9 +64,9 @@ public class AdmUserControllerTest {
 
     @Test
     public void testPutAdmUserController() throws Exception {
-        AdmUserDto admUserDto = new AdmUserDto("teste@test.com", "teste", "expectedHashCode");
+        UserDto admUserDto = new UserDto("teste@test.com", "teste", "expectedHashCode");
         AdmUserModel admUserModel = new AdmUserModel("teste@test.com", "teste", true);
-        when(admUserPresenter.putAdmUserPresenter(anyString(), any(AdmUserDto.class))).thenReturn(admUserModel);
+        when(admUserPresenter.putAdmUserPresenter(anyString(), any(UserDto.class))).thenReturn(admUserModel);
         mockMvc.perform(put("/api/adm/{id}", "id")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(admUserDto)))

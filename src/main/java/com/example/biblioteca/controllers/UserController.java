@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca.dto.UserDto;
-import com.example.biblioteca.models.AdmUserModel;
-import com.example.biblioteca.presenter.AdmUserPresenter;
+import com.example.biblioteca.models.UserModel;
+import com.example.biblioteca.presenter.UserPresenter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,22 +17,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
-
 @RestController
-@RequestMapping("/api/adm")
-public class AdmUserController {
+@RequestMapping("/api/user")
+public class UserController {
     
     @Autowired
-    private AdmUserPresenter admUserPresenter;
+    private UserPresenter userPresenter;
 
-    @PostMapping
-    public ResponseEntity<AdmUserModel> postAdmUserController(@RequestBody UserDto entity) throws Exception{
-        return ResponseEntity.status(HttpStatus.CREATED).body(admUserPresenter.postAdmUserPresenter(entity));
+    @PostMapping()
+    public ResponseEntity<UserModel> postUserController(@RequestBody UserDto entity) throws Exception{
+        return ResponseEntity.status(HttpStatus.CREATED).body(userPresenter.postUserPresenter(entity));
     }
-    
+
     @PutMapping("/{id}")
-    public  ResponseEntity<AdmUserModel> putAdmUserController(@PathVariable String id, @RequestBody UserDto entity) throws Exception{
-        return ResponseEntity.accepted().body(admUserPresenter.putAdmUserPresenter(id, entity));
+    public ResponseEntity<UserModel> putMethodName(@PathVariable String id, @RequestBody UserDto entity) throws Exception{
+        return ResponseEntity.accepted().body(userPresenter.putUserPresenter(id, entity));
     }
     
 }

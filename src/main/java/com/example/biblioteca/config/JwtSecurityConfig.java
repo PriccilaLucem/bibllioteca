@@ -47,7 +47,7 @@ public class JwtSecurityConfig{
         http
                 .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/swagger-ui/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/adm", "/api/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/adm", "/api/login, /api/user").permitAll()
                 .requestMatchers("/api/adm").hasRole("IS_ADM")
                 .requestMatchers("**").permitAll()
                 );

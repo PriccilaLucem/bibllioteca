@@ -1,19 +1,19 @@
 package com.example.biblioteca.dto;
 
-public class AdmUserDto {
+public class UserDto {
     private String email;
     private String password;
     private String hashCodeToCreateAdm;
 
-    public AdmUserDto(){}
+    public UserDto(){}
 
-    public AdmUserDto(String email, String password){
+    public UserDto(String email, String password){
         this.email = email;
         this.password = password;
     }
 
 
-    public AdmUserDto(String email, String password, String hashCodeToCreateAdm){
+    public UserDto(String email, String password, String hashCodeToCreateAdm){
         this.email = email;
         this.password = password;
         this.hashCodeToCreateAdm = hashCodeToCreateAdm;

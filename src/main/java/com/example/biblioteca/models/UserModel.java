@@ -12,7 +12,7 @@ public class UserModel extends AdmUserModel {
         setIsAdm(false);
     }
     
-    public UserModel(String password, String email){
+    public UserModel(String email, String password){
         super(email, password, false);
     }
 }

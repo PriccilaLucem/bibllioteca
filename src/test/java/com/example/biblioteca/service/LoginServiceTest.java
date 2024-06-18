@@ -44,7 +44,6 @@ public class LoginServiceTest {
 
         when(admUserRepository.findByEmail(anyString())).thenReturn(Optional.of(adm));
         when(admUserService.getAdmUserByEmailService(anyString())).thenReturn(adm);
-        when(admUserService.verifyPasswordAdmUserService(anyString(), anyString())).thenReturn(true);
         AdmUserModel verifiedAdm = loginService.verifyAdmUserService(adm);
 
         assertThat(verifiedAdm).isNotNull();
@@ -57,7 +56,6 @@ public class LoginServiceTest {
 
         when(admUserRepository.findByEmail(anyString())).thenReturn(Optional.of(adm));
         when(admUserService.getAdmUserByEmailService(anyString())).thenReturn(adm);
-        when(admUserService.verifyPasswordAdmUserService(anyString(), anyString())).thenReturn(false);
 
         assertThrows(UnauthorizedException.class, () -> {
             loginService.verifyAdmUserService(adm);

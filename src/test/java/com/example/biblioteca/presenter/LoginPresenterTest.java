@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.example.biblioteca.dto.AdmUserDto;
+import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.models.AdmUserModel;
 import com.example.biblioteca.security.JWTUtil;
 import com.example.biblioteca.service.LoginService;
@@ -46,7 +46,7 @@ public class LoginPresenterTest {
     public void TestLoginPresenter() throws Exception {
         AdmUserModel adm = new AdmUserModel("email@mail.com", "test", true);
         adm.setId("id");
-        AdmUserDto admDto = new AdmUserDto("email@mail.com", "test");
+        UserDto admDto = new UserDto("email@mail.com", "test");
 
         when(loginService.verifyAdmUserService(any(AdmUserModel.class))).thenReturn(adm);
         JWTUtil resultToken = loginPresenter.Login(admDto);
