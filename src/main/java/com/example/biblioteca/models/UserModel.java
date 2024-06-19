@@ -25,6 +25,16 @@ public class UserModel  {
     @Column(name = "is_adm", nullable = false, updatable = false)
     private Boolean isAdm;
 
+    public UserModel(){
+        this.isAdm = false;
+    }
+
+    public UserModel(String email, String password){
+        this.email = email;
+        this.password = password;
+        this.isAdm = false;
+    }
+
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = true)
     private BookModel book;

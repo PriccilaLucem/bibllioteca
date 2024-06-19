@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.models.UserModel;
-import com.example.biblioteca.repository.UserPresenter;
+import com.example.biblioteca.presenter.UserPresenter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
