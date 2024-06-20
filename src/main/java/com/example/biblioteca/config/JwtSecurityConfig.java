@@ -7,12 +7,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.RememberMeServices;
@@ -48,7 +44,7 @@ public class JwtSecurityConfig{
                 .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/swagger-ui/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/adm", "/api/login, /api/user").permitAll()
-                .requestMatchers("/api/adm").hasRole("IS_ADM")
+                .requestMatchers("/api/**").hasRole("IS_ADM")
                 .requestMatchers("**").permitAll()
                 );
 
@@ -75,19 +71,6 @@ public class JwtSecurityConfig{
      @Bean
     public DefaultWebSecurityExpressionHandler expressionHandler() {
         return new DefaultWebSecurityExpressionHandler();
-    }
-    
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("root")
-            .password(passwordEncoder().encode("system"))
-            .roles("IS_ADM", "IS_NOT_ADM")
-            .build();
-        return new InMemoryUserDetailsManager(user);
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }
