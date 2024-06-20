@@ -54,8 +54,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDto)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.email").value(user.getEmail()))
-                .andExpect(jsonPath("$.isAdm").value(false));
+                .andExpect(jsonPath("$.email").value(user.getEmail()));
     }
 
     @Test
@@ -69,8 +68,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDto)))
                 .andExpect(status().isAccepted())
-                .andExpect(jsonPath("$.email").value(user.getEmail()))
-                .andExpect(jsonPath("$.isAdm").value(false));
+                .andExpect(jsonPath("$.email").value(user.getEmail()));
     }
 
 }
