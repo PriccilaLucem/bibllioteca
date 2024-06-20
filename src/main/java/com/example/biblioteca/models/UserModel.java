@@ -16,28 +16,23 @@ public class UserModel  {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "email", nullable = false, length = 60, unique=true)
     private String email;
-
-    @Column(name = "password", nullable = false, length = 60)
-    private String password;
-
-    @Column(name = "is_adm", nullable = false, updatable = false)
-    private Boolean isAdm;
-
-    public UserModel(){
-        this.isAdm = false;
-    }
-
-    public UserModel(String email, String password){
-        this.email = email;
-        this.password = password;
-        this.isAdm = false;
-    }
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = true)
     private BookModel book;
+
+    public UserModel(){}
+
+    public UserModel(String email, String name){
+        this.email = email;
+        this.name = name;
+
+    }
 
     public BookModel getBook() {
         return book;
@@ -48,8 +43,11 @@ public class UserModel  {
     public String getId() {
         return id;
     }
-    public Boolean getIsAdm() {
-        return isAdm;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
     public void setBook(BookModel book) {
         this.book = book;
@@ -60,15 +58,4 @@ public class UserModel  {
     public void setId(String id) {
         this.id = id;
     }
-    public void setIsAdm(Boolean isAdm) {
-        this.isAdm = isAdm;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getPassword() {
-        return password;
-    }
-
-
 }

@@ -51,7 +51,6 @@ public class UserServiceTest {
 
         assertThat(createdUser).isNotNull();
         assertThat(createdUser.getEmail()).isEqualTo(user.getEmail());
-        assertThat(createdUser.getIsAdm()).isFalse();
         verify(userRepository, times(1)).save(user);
     }
 
@@ -68,8 +67,6 @@ public class UserServiceTest {
 
         assertThat(updatedUser).isNotNull();
         assertThat(updatedUser.getEmail()).isEqualTo(userTobeUpdated.getEmail());
-        assertThat(updatedUser.getPassword()).isEqualTo(userTobeUpdated.getPassword());
-        assertThat(updatedUser.getIsAdm()).isFalse();
 
         verify(userRepository, times(1)).save(userTobeUpdated);
     }

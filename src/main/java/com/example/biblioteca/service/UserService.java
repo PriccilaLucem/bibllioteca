@@ -11,6 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UserService {
+    
     @Autowired
     private UserRepository userRepository;
     
@@ -18,11 +19,8 @@ public class UserService {
     private ValidateData validateData;
 
     public UserModel createUser(UserModel user) throws Exception{
-        String password = validateData.hashUserPasswordUtil(user.getPassword());
         validateData.verifyUserEmailUtil(user.getEmail());
         
-        user.setIsAdm(false);
-        user.setPassword(password);
         
         return userRepository.save(user);
     }
@@ -31,12 +29,15 @@ public class UserService {
         if(userRepository.findById(id).isPresent()){
             user.setId(id);
             validateData.verifyUserEmailUtil(user.getEmail());
-            user.setPassword(validateData.hashUserPasswordUtil(user.getPassword()));
             return userRepository.save(user);
         }
         throw new EntityNotFoundException("User is invalid");
     }
     
+    public UserModel findUserByEmail(String email){
+        return userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
     // public UserModel findAllUsers()
 
     

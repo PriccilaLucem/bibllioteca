@@ -35,8 +35,6 @@ public class UserPresenterTest {
 
         assertThat(userCreated).isNotNull();
         assertThat(userCreated.getEmail()).isEqualTo(userDto.getEmail());
-        assertThat(userCreated.getPassword()).isEqualTo(userDto.getPassword());
-        assertThat(userCreated.getIsAdm()).isFalse();
     }
 
 
@@ -53,7 +51,5 @@ public class UserPresenterTest {
 
         assertThat(userCreated).isNotNull();
         assertThat(userCreated.getEmail()).isEqualTo(userDto.getEmail());
-        assertThat(userCreated.getPassword()).isEqualTo(userDto.getPassword());
-        assertThat(userCreated.getIsAdm()).isFalse();
     }
 }
