@@ -29,4 +29,35 @@ public class BookModel {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryModel category;
+
+    public CategoryModel getCategory() {
+        return category;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public Long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public Integer getQuantity() {
+        return quantity;
+    }
+    public void setCategory(CategoryModel category) {
+        this.category = category;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }

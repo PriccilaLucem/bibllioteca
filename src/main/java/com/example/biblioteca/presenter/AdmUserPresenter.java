@@ -2,7 +2,7 @@ package com.example.biblioteca.presenter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.example.biblioteca.dto.UserDto;
 import com.example.biblioteca.models.AdmUserModel;
@@ -11,7 +11,7 @@ import com.example.biblioteca.service.AdmUserService;
 import com.example.biblioteca.util.Mapper;
 
 
-@Service
+@Component
 public class AdmUserPresenter {
     @Value("${ADM_HASH_CODE}")
     private String hashCode;
