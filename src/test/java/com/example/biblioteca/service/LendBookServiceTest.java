@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import java.util.Date;
+
 public class LendBookServiceTest {
 
     @Mock
@@ -37,6 +39,7 @@ public class LendBookServiceTest {
         book.setName("Test Book");
         book.setDescription("A test book description");
         book.setQuantity(5);
+        book.setLendDate(new Date());
 
         UserModel user = new UserModel();
         user.setId("string");
@@ -48,6 +51,7 @@ public class LendBookServiceTest {
 
         assertEquals(4, book.getQuantity());
         assertEquals(book, updatedUser.getBook());
+
         verify(bookRepository, times(1)).save(book);
         verify(userRepository, times(1)).save(user);
     }

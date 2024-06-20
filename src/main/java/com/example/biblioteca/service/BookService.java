@@ -14,7 +14,7 @@ public class BookService {
     private BookRepository bookRepository;
 
     public BookModel createBookService(BookModel book){
-
+        book.setLendDate(null);
         return bookRepository.save(book);
     }
 
@@ -31,7 +31,7 @@ public class BookService {
         bookToBeUpdated.setCategory(book.getCategory());
         bookToBeUpdated.setDescription(book.getDescription());
         bookToBeUpdated.setQuantity(book.getQuantity());
-        
+        book.setLendDate(null);
         return bookRepository.save(bookToBeUpdated);
     }
 

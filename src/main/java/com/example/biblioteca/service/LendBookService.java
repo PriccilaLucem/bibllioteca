@@ -7,7 +7,7 @@ import com.example.biblioteca.models.BookModel;
 import com.example.biblioteca.models.UserModel;
 import com.example.biblioteca.repository.BookRepository;
 import com.example.biblioteca.repository.UserRepository;
-
+import java.util.Date;
 
 @Service
 public class LendBookService {
@@ -19,6 +19,7 @@ public class LendBookService {
     private UserRepository userRepository;
 
     public UserModel lendBookService(UserModel user, BookModel book){
+        book.setLendDate(new Date());
         user.setBook(book);
         book.setQuantity(book.getQuantity() -1);
         bookRepository.save(book);

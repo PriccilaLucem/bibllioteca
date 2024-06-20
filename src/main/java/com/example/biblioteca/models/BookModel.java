@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.util.Date;
 @Entity
 @Table(name = "book")
 public class BookModel {
@@ -25,6 +26,9 @@ public class BookModel {
     
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    @Column(name = "lend_date", nullable = true )
+    private Date lendDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
@@ -59,5 +63,11 @@ public class BookModel {
     }
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+    public void setLendDate(Date lendDate) {
+        this.lendDate = lendDate;
+    }
+    public Date getLendDate() {
+        return lendDate;
     }
 }

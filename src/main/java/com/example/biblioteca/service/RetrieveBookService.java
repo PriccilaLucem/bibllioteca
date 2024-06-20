@@ -19,6 +19,7 @@ public class RetrieveBookService {
 
     public UserModel retrieveBookService(UserModel user, BookModel book){
         user.setBook(null);
+        book.setLendDate(null);
         book.setQuantity(book.getQuantity() + 1);
         bookRepository.save(book);
         return userRepository.save(user);
