@@ -7,7 +7,7 @@ import com.example.biblioteca.models.BookModel;
 import com.example.biblioteca.repository.BookRepository;
 
 import jakarta.persistence.EntityNotFoundException;
-
+import java.util.List;
 @Service
 public class BookService {
     @Autowired 
@@ -22,9 +22,9 @@ public class BookService {
         return bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Book not found"));
     }
     
-    // public BookModel listAllBooks(){
-        // return bookRepository
-    // }
+    public List<BookModel> listAllBooks(String search){
+        return bookRepository.findByTitleOrDescriptionOrCategoryName(search);
+    }
 
     public BookModel updateBook(Long id, BookModel book){
         BookModel bookToBeUpdated = this.findBookById(id);

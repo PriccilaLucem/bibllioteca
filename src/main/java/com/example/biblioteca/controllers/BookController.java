@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/book")
@@ -26,11 +25,6 @@ public class BookController {
     
     @Autowired
     private BookPresenter bookPresenter;
-
-    @GetMapping()
-    public String getBookByCategoryOrName(@RequestParam(required = false) String bookOrCategoryName) {
-        return new String();
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<BookModel> getOneBookController(@PathVariable(name = "id") Long id) {
@@ -45,6 +39,11 @@ public class BookController {
     @PutMapping("/{id}")
     public ResponseEntity<BookModel> putBookController(@PathVariable Long id, @RequestBody BookDto entity) {
         return ResponseEntity.accepted().body(bookPresenter.putBookPresenter(id, entity)) ;
+    }
+    
+    @GetMapping()
+    public ResponseEntity<List<BookModel>> getAllBooks(@RequestParam(required = false) String search) {
+        return ResponseEntity.ok().body(bookPresenter.getAllBooksPresenter(search));
     }
     
     

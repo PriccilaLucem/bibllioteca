@@ -10,6 +10,7 @@ import com.example.biblioteca.service.BookService;
 import com.example.biblioteca.service.CategoryService;
 import com.example.biblioteca.util.Mapper;
 
+import java.util.List;
 @Component
 public class BookPresenter {
     @Autowired
@@ -35,6 +36,9 @@ public class BookPresenter {
     public BookModel getBookById(Long id){
         return bookService.findBookById(id);
     }
-    // public BookModel findAllBookByNameOrCategory()
+
+    public List<BookModel> getAllBooksPresenter(String search){
+        return bookService.listAllBooks(search);
+    }
 
 }

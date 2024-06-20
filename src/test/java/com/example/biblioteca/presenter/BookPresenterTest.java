@@ -2,7 +2,11 @@ package com.example.biblioteca.presenter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -63,7 +67,22 @@ class BookPresenterTest {
         verify(bookService, times(1)).createBookService(any(BookModel.class));
     }
 
-@Test
+    @Test 
+    void tetGetAllBooksPresenter(){
+        BookModel book = new BookModel();
+        book.setId(1L);
+        book.setDescription("A book");
+        book.setQuantity(10);
+
+        when(bookService.listAllBooks(anyString())).thenReturn(List.of(book));
+
+        List<BookModel> foundBooks = bookService.listAllBooks("");
+
+        assertEquals(book, foundBooks.get(0));
+        verify(bookService, times(1)).listAllBooks("");
+    }
+
+    @Test
     void testPutBookPresenter() {
         BookDto bookDto = new BookDto();
         bookDto.setCategoryId(1L);
